@@ -17,8 +17,7 @@ public class MrListController {
 
     @GetMapping
     public String list(Model model) {
-        log.info("{}", mergeRequestService.getDto());
-        model.addAttribute("obj", mergeRequestService.get());
+//        model.addAttribute("obj", mergeRequestService.get());
         return "list";
     }
 }

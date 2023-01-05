@@ -2,6 +2,7 @@ package io.github.tttol.mrls.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MergeRequestInfoDto {
     int id;
@@ -51,13 +53,13 @@ public class MergeRequestInfoDto {
 
     int downvotes;
 
-    Author author;
+    UserDto author;
 
-    List<Author> assignees;
+    List<UserDto> assignees;
 
-    Author assignee;
+    UserDto assignee;
 
-    List<Author> reviewers;
+    List<UserDto> reviewers;
 
     int sourceProjectId;
 

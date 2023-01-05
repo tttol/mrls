@@ -3,4 +3,4 @@ app:
     uri: https://gitlab.com
     projectId: 42326898
     api:
-      url: /api/v4/projects/${app.gitlab.projectId}/merge_requests
+      endpoint: /api/v4/projects/${app.gitlab.projectId}/merge_requests

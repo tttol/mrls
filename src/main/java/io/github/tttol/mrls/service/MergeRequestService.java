@@ -1,29 +1,41 @@
 package io.github.tttol.mrls.service;
 
 import io.github.tttol.mrls.dto.MergeRequestInfoDto;
+import io.github.tttol.mrls.external.GitLabApiExecutor;
+import io.github.tttol.mrls.form.MergeRequestInfoForm;
+import io.github.tttol.mrls.form.UserForm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class MergeRequestService {
-    private final RestTemplate restTemplate;
+    private final GitLabApiExecutor gitLabApiExecutor;
 
-    @Value("${app.gitlab.api.url}")
-    private String apiUrl;
-
-    public String get() {
-        return restTemplate.getForObject(apiUrl, String.class);
+    public List<MergeRequestInfoForm> get() {
+        var mergeRequestInfoDtos = executeGitLabApi();
+        return mergeRequestInfoDtos.stream()
+                .collect(Collectors.groupingBy(e -> e.getAssignee().getId()))
+                .values().stream().map(this::generateForm).toList();
     }
 
-    public List<MergeRequestInfoDto> getDto() {
-        var response = restTemplate.getForObject(apiUrl, MergeRequestInfoDto[].class);
-        return Objects.isNull(response) ? List.of() : Arrays.asList(response);
+    private List<MergeRequestInfoDto> executeGitLabApi() {
+        return gitLabApiExecutor.getMergeRequests();
+    }
+
+    private MergeRequestInfoForm generateForm(List<MergeRequestInfoDto> dtos) {
+        var userDto = dtos.stream().findAny()
+                .map(MergeRequestInfoDto::getAssignee).orElseThrow();
+        var userForm = new UserForm(userDto.getId(),
+                userDto.getUsername(),
+                userDto.getName(),
+                userDto.getState(),
+                userDto.getAvatarUrl(),
+                userDto.getWebUrl());
+        var urls = dtos.stream().map(MergeRequestInfoDto::getWebUrl).toList();
+        return new MergeRequestInfoForm(userForm, urls, urls.size());
     }
 }
