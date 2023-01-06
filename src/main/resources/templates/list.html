@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>List</title>
+        <link rel="stylesheet" th:href="@{/css/list.css}">
     </head>
     <body>
         <table>
             <tr>
                 <th>Member</th>
                 <th>URL</th>
-                <th>Count</th>
             </tr>
-            <tr>
-                <td><img src="hoge"/></td>
-                <td><a href="">MR 1</a></td>
-                <td>2</td>
+            <tr th:each="form : ${mergeRequestInfoFormList}">
+                <td>
+                    <div class="avatar">
+                        <img class="avatarImg" th:src="${form.assignee.avatarUrl}"/>
+                        <span class="badge" th:text="${form.assignedMrCount}">1</span>
+                    </div>
+                </td>
+                <td>
+                    <div th:each="link : ${form.linkForms}">
+                        <div>
+                            <a th:href="${link.webUrl}" th:text="${link.title}">MRタイトル</a>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </table>
     </body>

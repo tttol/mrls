@@ -2,6 +2,7 @@ package io.github.tttol.mrls.service;
 
 import io.github.tttol.mrls.dto.MergeRequestInfoDto;
 import io.github.tttol.mrls.external.GitLabApiExecutor;
+import io.github.tttol.mrls.form.LinkForm;
 import io.github.tttol.mrls.form.MergeRequestInfoForm;
 import io.github.tttol.mrls.form.UserForm;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class MergeRequestService {
                 userDto.getState(),
                 userDto.getAvatarUrl(),
                 userDto.getWebUrl());
-        var urls = dtos.stream().map(MergeRequestInfoDto::getWebUrl).toList();
-        return new MergeRequestInfoForm(userForm, urls, urls.size());
+        var linkForms = dtos.stream().map(e -> new LinkForm(e.getTitle(), e.getWebUrl())).toList();
+        return new MergeRequestInfoForm(userForm, linkForms, linkForms.size());
     }
 }
