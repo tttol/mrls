@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +19,11 @@ public class MergeRequestService {
     public List<MergeRequestInfoForm> get() {
         var mergeRequestInfoDtos = executeGitLabApi();
         return mergeRequestInfoDtos.stream()
-                .collect(Collectors.groupingBy(e -> e.getAssignee().getId()))
+                .collect(Collectors.groupingBy(
+                                e -> Objects.isNull(e.getAssignee()) ?
+                                        e.getAuthor().getId() : e.getAssignee().getId()
+                        )
+                )
                 .values().stream().map(this::generateForm).toList();
     }
 

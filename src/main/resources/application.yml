@@ -1,6 +1,15 @@
+#spring.profiles.active: local
 app:
   gitlab:
-    uri: https://gitlab.com
-    projectId: 42326898
+    project:
+      id:
+      accessToken:
     api:
-      endpoint: /api/v4/projects/${app.gitlab.projectId}/merge_requests
+      endpoint: https://gitlab.com/api/v4/projects/${app.gitlab.project.id}/merge_requests
+logging:
+  level:
+    root: INFO
+    io:
+      github:
+        tttol:
+          mrls: DEBUG

@@ -1,0 +1,7 @@
+app:
+  gitlab:
+    project:
+      id:
+      accessToken:
+    api:
+      endpoint:
