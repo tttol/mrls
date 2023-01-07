@@ -1,4 +1,8 @@
-#spring.profiles.active: local
+spring:
+  thymeleaf:
+    cache: false # アプリリロードなしで変更を反映
+    cache-period: 0
+    prefix: file:src/main/resources/templates/
 app:
   gitlab:
     project:

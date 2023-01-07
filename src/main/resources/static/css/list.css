@@ -1,3 +1,33 @@
+body {
+    background-color: #15202B;
+    color: #fff;
+    margin: 0;
+}
+
+main {
+    margin: 15px 200px;
+}
+
+a:-webkit-any-link  {
+    color: #fff;
+}
+
+ul {
+  list-style-type: none;
+}
+
+table {
+    border-collapse:collapse;
+}
+
+.headerBox {
+    background-color: #292961;
+    height: 30px;
+    font-size: 25px;
+    padding: 12px 0px;
+    text-align: center;
+}
+
 .avatarImg {
     width: 50px;
     height: 50px;
@@ -25,4 +55,39 @@
     line-height: 20px;
     font-weight: bold;
    padding: 2px 3px;
+}
+
+.assigneeBox {
+    margin-bottom: 10px;
+    border-bottom: solid;
+    border-bottom-width: thin;
+    border-bottom-color: darkgray;
+}
+
+.mrList {
+    margin: 0;
+}
+
+.mrList li:not(:last-child) {
+    border-bottom: solid;
+    border-bottom-width: thin;
+    border-bottom-color: darkgray;
+}
+
+.mrBox {
+    padding: 5px;
+}
+
+.mrLink {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.mrLink:hover {
+    opacity: 0.7;
+}
+
+footer .appVer {
+    color: darkgray;
+    font-size: 10pt;
 }

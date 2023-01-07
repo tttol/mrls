@@ -6,26 +6,29 @@
         <link rel="stylesheet" th:href="@{/css/list.css}">
     </head>
     <body>
-        <table>
-            <tr>
-                <th>Member</th>
-                <th>URL</th>
-            </tr>
-            <tr th:each="form : ${mergeRequestInfoFormList}">
-                <td>
-                    <div class="avatar">
-                        <img class="avatarImg" th:src="${form.assignee.avatarUrl}"/>
-                        <span class="badge" th:text="${form.assignedMrCount}">1</span>
-                    </div>
-                </td>
-                <td>
-                    <div th:each="link : ${form.linkForms}">
-                        <div>
-                            <a th:href="${link.webUrl}" th:text="${link.title}">MRタイトル</a>
+        <div th:replace="fragment/header::header"></div>
+        <main>
+            <table>
+                <tr class="assigneeBox" th:each="form : ${mergeRequestInfoFormList}">
+                    <td>
+                        <div class="avatar">
+                            <img class="avatarImg" th:src="${form.assignee.avatarUrl}"/>
+                            <span class="badge" th:text="${form.assignedMrCount}">1</span>
                         </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                    <td>
+                        <ul class="mrList">
+                            <li th:each="link : ${form.linkForms}">
+                                <div class="mrBox">
+                                    <a class="mrLink" th:href="${link.webUrl}" th:text="${link.title}"
+                                       target="_blank">MRタイトル</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </main>
+        <div th:replace="fragment/footer::footer"></div>
     </body>
 </html>
