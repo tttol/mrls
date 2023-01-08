@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MergeRequestInfoDto {
+public class GitLabMergeRequestApiResponseDto {
     int id;
 
     int iid;

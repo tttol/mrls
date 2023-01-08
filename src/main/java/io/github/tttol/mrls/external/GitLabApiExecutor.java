@@ -1,6 +1,6 @@
 package io.github.tttol.mrls.external;
 
-import io.github.tttol.mrls.dto.MergeRequestInfoDto;
+import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
 import io.github.tttol.mrls.exception.GitLabApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class GitLabApiExecutor {
     @Value("${app.gitlab.project.accessToken}")
     private String projectAccessToken;
 
-    public List<MergeRequestInfoDto> getMergeRequests() {
+    public List<GitLabMergeRequestApiResponseDto> getMergeRequests() {
         // TODO 例外処理
         try {
             var requestEntity = RequestEntity
@@ -35,7 +35,7 @@ public class GitLabApiExecutor {
                     .header("Authorization", "Bearer %s".formatted(projectAccessToken))
                     .build();
             log.info("api url -> {}", requestEntity.getUrl());
-            var responseEntity = restTemplate.exchange(requestEntity, MergeRequestInfoDto[].class);
+            var responseEntity = restTemplate.exchange(requestEntity, GitLabMergeRequestApiResponseDto[].class);
             log.debug("status code -> {}", responseEntity.getStatusCode());
             var body = responseEntity.getBody();
             return Objects.isNull(body) ? List.of() : Arrays.asList(body);

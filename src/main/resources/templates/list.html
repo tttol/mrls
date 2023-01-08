@@ -8,20 +8,36 @@
     <body>
         <div th:replace="fragment/header::header"></div>
         <main>
-            <table>
-                <tr class="assigneeBox" th:each="form : ${mergeRequestInfoFormList}">
+            <table class="mrTable">
+                <tr class="assigneeBox" th:each="infoForm : ${mrInfoFormList}">
                     <td>
                         <div class="avatar">
-                            <img class="avatarImg" th:src="${form.assignee.avatarUrl}"/>
-                            <span class="badge" th:text="${form.assignedMrCount}">1</span>
+                            <img class="assigneeAvatarImg" th:src="${infoForm.assignee.avatarUrl}"/>
+                            <span class="badge" th:text="${infoForm.assignedMrCount}">1</span>
                         </div>
                     </td>
                     <td>
                         <ul class="mrList">
-                            <li th:each="link : ${form.linkForms}">
+                            <li th:each="detailForm : ${infoForm.mrDetailForms}">
                                 <div class="mrBox">
-                                    <a class="mrLink" th:href="${link.webUrl}" th:text="${link.title}"
-                                       target="_blank">MRタイトル</a>
+                                    <div class="titleBox">
+                                        <div class="mrLinkBox">
+                                            <a class="mrLink" th:href="${detailForm.webUrl}"
+                                               th:text="${detailForm.title}"
+                                               target="_blank">MRタイトル</a>
+                                        </div>
+                                        <span class="at">
+                                            created at:[[${#temporals.format(detailForm.createdAt, 'yyyy/MM/dd
+                                            HH:mm:ss')}]]
+                                        </span>
+                                        <span class="at">
+                                            updated at:[[${#temporals.format(detailForm.updatedAt, 'yyyy/MM/dd
+                                            HH:mm:ss')}]]
+                                        </span>
+                                    </div>
+                                    <div class="authorBox">
+                                        <img class="authorAvatarImg" th:src="${detailForm.author.avatarUrl}"/>
+                                    </div>
                                 </div>
                             </li>
                         </ul>

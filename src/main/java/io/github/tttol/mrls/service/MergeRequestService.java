@@ -1,15 +1,16 @@
 package io.github.tttol.mrls.service;
 
-import io.github.tttol.mrls.dto.MergeRequestInfoDto;
+import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
 import io.github.tttol.mrls.external.GitLabApiExecutor;
-import io.github.tttol.mrls.form.LinkForm;
-import io.github.tttol.mrls.form.MergeRequestInfoForm;
+import io.github.tttol.mrls.form.MrDetailForm;
+import io.github.tttol.mrls.form.MrInfoForm;
 import io.github.tttol.mrls.form.UserForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class MergeRequestService {
     private final GitLabApiExecutor gitLabApiExecutor;
 
-    public List<MergeRequestInfoForm> get() {
+    public List<MrInfoForm> get() {
         var mergeRequestInfoDtos = executeGitLabApi();
         return mergeRequestInfoDtos.stream()
                 .collect(Collectors.groupingBy(
@@ -28,20 +29,40 @@ public class MergeRequestService {
                 .values().stream().map(this::generateForm).toList();
     }
 
-    private List<MergeRequestInfoDto> executeGitLabApi() {
+    private List<GitLabMergeRequestApiResponseDto> executeGitLabApi() {
         return gitLabApiExecutor.getMergeRequests();
     }
 
-    private MergeRequestInfoForm generateForm(List<MergeRequestInfoDto> dtos) {
-        var userDto = dtos.stream().findAny()
-                .map(MergeRequestInfoDto::getAssignee).orElseThrow();
-        var userForm = new UserForm(userDto.getId(),
-                userDto.getUsername(),
-                userDto.getName(),
-                userDto.getState(),
-                userDto.getAvatarUrl(),
-                userDto.getWebUrl());
-        var linkForms = dtos.stream().map(e -> new LinkForm(e.getTitle(), e.getWebUrl())).toList();
-        return new MergeRequestInfoForm(userForm, linkForms, linkForms.size());
+    private MrInfoForm generateForm(List<GitLabMergeRequestApiResponseDto> responseDtos) {
+        var responseDto = responseDtos.stream().findAny().orElseThrow();
+        var assigneeForm = Optional.ofNullable(responseDto.getAssignee())
+                .map(assignee -> new UserForm(
+                                assignee.getId(),
+                                assignee.getUsername(),
+                                assignee.getName(),
+                                assignee.getState(),
+                                assignee.getAvatarUrl(),
+                                assignee.getWebUrl()
+                        )
+                ).orElse(UserForm.empty());
+        var linkForms = responseDtos.stream().map(e ->
+                new MrDetailForm(
+                        e.getTitle(),
+                        e.getWebUrl(),
+                        Optional.ofNullable(e.getAuthor())
+                                .map(assignee -> new UserForm(
+                                                assignee.getId(),
+                                                assignee.getUsername(),
+                                                assignee.getName(),
+                                                assignee.getState(),
+                                                assignee.getAvatarUrl(),
+                                                assignee.getWebUrl()
+                                        )
+                                )
+                                .orElse(UserForm.empty()),
+                        e.getCreatedAt(),
+                        e.getUpdatedAt()
+                )).toList();
+        return new MrInfoForm(assigneeForm, linkForms, linkForms.size());
     }
 }

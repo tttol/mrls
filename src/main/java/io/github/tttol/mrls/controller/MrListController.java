@@ -17,7 +17,7 @@ public class MrListController {
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("mergeRequestInfoFormList", mergeRequestService.get());
+        model.addAttribute("mrInfoFormList", mergeRequestService.get());
         return "list";
     }
 }

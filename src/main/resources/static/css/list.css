@@ -5,7 +5,7 @@ body {
 }
 
 main {
-    margin: 15px 200px;
+    margin: 1% 5%;
 }
 
 a:-webkit-any-link  {
@@ -20,6 +20,10 @@ table {
     border-collapse:collapse;
 }
 
+.mrTable {
+    width: 100%;
+}
+
 .headerBox {
     background-color: #292961;
     height: 30px;
@@ -28,9 +32,17 @@ table {
     text-align: center;
 }
 
-.avatarImg {
+.assigneeAvatarImg {
     width: 50px;
     height: 50px;
+    border: solid;
+    border-width: 0.5px;
+    border-radius: 50%;
+}
+
+.authorAvatarImg {
+    width: 25px;
+    height: 25px;
     border: solid;
     border-width: 0.5px;
     border-radius: 50%;
@@ -66,6 +78,7 @@ table {
 
 .mrList {
     margin: 0;
+    padding: 0;
 }
 
 .mrList li:not(:last-child) {
@@ -76,6 +89,11 @@ table {
 
 .mrBox {
     padding: 5px;
+    display: flex;
+}
+
+.mrLinkBox {
+    margin-bottom: 5px;
 }
 
 .mrLink {
@@ -85,6 +103,20 @@ table {
 
 .mrLink:hover {
     opacity: 0.7;
+}
+
+.titleBox {
+    padding-right: 20px;
+}
+
+.at {
+    color: darkgray;
+    font-size: 13px;
+    padding-right: 10px;
+}
+
+.authorBox {
+    margin-left: auto;
 }
 
 footer .appVer {
