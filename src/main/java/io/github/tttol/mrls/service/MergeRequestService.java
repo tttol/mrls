@@ -8,6 +8,7 @@ import io.github.tttol.mrls.form.UserForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,7 +27,9 @@ public class MergeRequestService {
                                         e.getAuthor().getId() : e.getAssignee().getId()
                         )
                 )
-                .values().stream().map(this::generateForm).toList();
+                .values().stream().map(this::generateForm)
+                .sorted(Comparator.comparing(e -> e.assignee().id()))
+                .toList();
     }
 
     private List<GitLabMergeRequestApiResponseDto> executeGitLabApi() {
