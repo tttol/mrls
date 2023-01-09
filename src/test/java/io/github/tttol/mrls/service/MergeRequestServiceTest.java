@@ -103,8 +103,8 @@ public class MergeRequestServiceTest {
                                             null,
                                             null
                                     ),
-                                    LocalDateTime.of(1970, 1, 1, 0, 0, 0),
-                                    LocalDateTime.of(2000, 1, 1, 0, 0, 0)
+                                    LocalDateTime.of(1970, 1, 1, 9, 0, 0),
+                                    LocalDateTime.of(2000, 1, 1, 9, 0, 0)
                             ),
                             new MrDetailForm(
                                     "title2",
@@ -117,8 +117,8 @@ public class MergeRequestServiceTest {
                                             null,
                                             null
                                     ),
-                                    LocalDateTime.of(1970, 1, 1, 0, 0, 0),
-                                    LocalDateTime.of(2000, 1, 1, 0, 0, 0)
+                                    LocalDateTime.of(1970, 1, 1, 9, 0, 0),
+                                    LocalDateTime.of(2000, 1, 1, 9, 0, 0)
                             ),
                             new MrDetailForm(
                                     "title3",
@@ -131,8 +131,8 @@ public class MergeRequestServiceTest {
                                             null,
                                             null
                                     ),
-                                    LocalDateTime.of(1970, 1, 1, 0, 0, 0),
-                                    LocalDateTime.of(2000, 1, 1, 0, 0, 0)
+                                    LocalDateTime.of(1970, 1, 1, 9, 0, 0),
+                                    LocalDateTime.of(2000, 1, 1, 9, 0, 0)
 
                             )
                     ),
@@ -170,8 +170,8 @@ public class MergeRequestServiceTest {
                                     "title1",
                                     "url1",
                                     new UserForm(11, "author_username11", "author_name11", "active", null, null),
-                                    LocalDateTime.of(1970, 1, 1, 0, 0, 0),
-                                    LocalDateTime.of(2000, 1, 1, 0, 0, 0)
+                                    LocalDateTime.of(1970, 1, 1, 9, 0, 0),
+                                    LocalDateTime.of(2000, 1, 1, 9, 0, 0)
                             )
                     ),
                     1
