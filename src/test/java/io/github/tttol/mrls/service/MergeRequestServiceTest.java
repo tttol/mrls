@@ -26,7 +26,7 @@ public class MergeRequestServiceTest {
     }
 
     @AfterEach
-    void tearDown() throws Exception {
+    void close() throws Exception {
         closeable.close();
     }
 
@@ -177,6 +177,16 @@ public class MergeRequestServiceTest {
                     1
             ));
 
+            var actual = mergeRequestService.get();
+
+            assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
+        }
+
+        @Test
+        @DisplayName("MR0件の場合")
+        void noMrTest() {
+            doReturn(List.of()).when(gitLabApiExecutor).getMergeRequests();
+            var expected = List.of();
             var actual = mergeRequestService.get();
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
