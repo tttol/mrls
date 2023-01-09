@@ -169,7 +169,7 @@ public class MergeRequestServiceTest {
                             new MrDetailForm(
                                     "title1",
                                     "url1",
-                                    new UserForm(11, "author_username11444", "author_name11", "active", null, null),
+                                    new UserForm(11, "author_username11", "author_name11", "active", null, null),
                                     LocalDateTime.of(1970, 1, 1, 0, 0, 0),
                                     LocalDateTime.of(2000, 1, 1, 0, 0, 0)
                             )
