@@ -8,6 +8,9 @@ import io.github.tttol.mrls.form.UserForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -63,9 +66,14 @@ public class MergeRequestService {
                                         )
                                 )
                                 .orElse(UserForm.empty()),
-                        e.getCreatedAt(),
-                        e.getUpdatedAt()
+                        toJst(e.getCreatedAt()),
+                        toJst(e.getUpdatedAt())
                 )).toList();
         return new MrInfoForm(assigneeForm, linkForms, linkForms.size());
+    }
+
+    private LocalDateTime toJst(LocalDateTime utc) {
+        return ZonedDateTime.of(utc, ZoneId.of("UTC"))
+                .withZoneSameInstant(ZoneId.of("Asia/Tokyo")).toLocalDateTime();
     }
 }
