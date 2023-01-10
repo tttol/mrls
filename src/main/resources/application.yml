@@ -1,6 +1,24 @@
 spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          gitlab:
+            authorization-uri:
+            token-uri: https://gitlab.com/oauth/token
+            user-info-uri: https://gitlab.com/api/v4/user
+            user-name-attribute: username
+            jwk-set-uri: https://gitlab.com/oauth/discovery/keys
+        registration:
+          gitlab:
+            client-id: hogehoge # set in application-env.yml
+            client-secret: hogehoge # set in application-env.yml
+            authorization-grant-type: authorization_code
+            redirect-uri: http://hogehoge # set in application-env.yml
+            scope: read_api
+            client-name: mrls-localhost
   thymeleaf:
-    cache: false # アプリリロードなしで変更を反映
+    cache: false # apply html change without app reload
     cache-period: 0
     prefix: file:src/main/resources/templates/
 app:
