@@ -8,7 +8,7 @@
     <body>
         <div th:replace="fragment/header::header"></div>
         <main>
-            <form th:action="@{/gitlab/oauth/authorize}" method="get">
+            <form th:action="@{/oauth2/authorization/mrls-localhost}" method="get">
                 <button class="signInBtn" onClick="">
                     <svg class="tanuki-logo" width="25" height="24" viewBox="0 0 25 24" fill="none"
                          xmlns="http://www.w3.org/2000/svg">

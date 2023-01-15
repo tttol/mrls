@@ -18,7 +18,7 @@ spring:
             scope: read_api
             client-name: mrls-localhost
   thymeleaf:
-    cache: false # apply html change without app reload
+    cache: false # apply html change without reloading app
     cache-period: 0
     prefix: file:src/main/resources/templates/
 app:
