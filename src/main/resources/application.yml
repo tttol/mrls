@@ -14,7 +14,7 @@ spring:
             client-id: hogehoge # set in application-env.yml
             client-secret: hogehoge # set in application-env.yml
             authorization-grant-type: authorization_code
-            redirect-uri: http://hogehoge # set in application-env.yml
+            redirect-uri: http://localhost:8080/login/oauth2/code/mrls-localhost
             scope: read_api
             client-name: mrls-localhost
   thymeleaf:

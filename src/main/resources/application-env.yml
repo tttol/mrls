@@ -1,3 +1,26 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          mrls-localhost:
+            authorization-uri:
+            token-uri:
+            user-info-uri:
+            user-name-attribute:
+            jwk-set-uri:
+        registration:
+          mrls-localhost:
+            client-id:
+            client-secret:
+            authorization-grant-type:
+            redirect-uri:
+            scope:
+            client-name:
+  thymeleaf:
+    cache:
+    cache-period:
+    prefix:
 app:
   gitlab:
     project:
@@ -5,3 +28,10 @@ app:
       accessToken:
     api:
       endpoint:
+logging:
+  level:
+    root:
+    io:
+      github:
+        tttol:
+          mrls:
