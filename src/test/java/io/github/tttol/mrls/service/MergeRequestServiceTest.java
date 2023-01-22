@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
 public class MergeRequestServiceTest {
@@ -88,7 +89,7 @@ public class MergeRequestServiceTest {
                             .updatedAt(LocalDateTime.of(2000, 1, 1, 0, 0, 0))
                             .build()
             );
-            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests();
+            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
             var expected = List.of(new MrInfoForm(
                     new UserForm(1, "assignee_username1", "assignee_name1", "active", null, null),
                     List.of(
@@ -139,7 +140,7 @@ public class MergeRequestServiceTest {
                     3
             ));
 
-            var actual = mergeRequestService.get();
+            var actual = mergeRequestService.get(anyString());
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
         }
@@ -162,7 +163,7 @@ public class MergeRequestServiceTest {
                             .updatedAt(LocalDateTime.of(2000, 1, 1, 0, 0, 0))
                             .build()
             );
-            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests();
+            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
             var expected = List.of(new MrInfoForm(
                     UserForm.empty(),
                     List.of(
@@ -177,7 +178,7 @@ public class MergeRequestServiceTest {
                     1
             ));
 
-            var actual = mergeRequestService.get();
+            var actual = mergeRequestService.get(anyString());
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
         }
@@ -185,9 +186,9 @@ public class MergeRequestServiceTest {
         @Test
         @DisplayName("MR0件の場合")
         void noMrTest() {
-            doReturn(List.of()).when(gitLabApiExecutor).getMergeRequests();
+            doReturn(List.of()).when(gitLabApiExecutor).getMergeRequests(anyString());
             var expected = List.of();
-            var actual = mergeRequestService.get();
+            var actual = mergeRequestService.get(anyString());
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
         }

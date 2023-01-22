@@ -25,7 +25,6 @@ app:
   gitlab:
     project:
       id:
-      accessToken:
     api:
       endpoint: https://gitlab.com/api/v4/projects/${app.gitlab.project.id}/merge_requests
 logging:
