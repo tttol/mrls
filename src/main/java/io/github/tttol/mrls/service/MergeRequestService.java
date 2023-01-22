@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class MergeRequestService {
     private final GitLabApiExecutor gitLabApiExecutor;
 
-    public List<MrInfoForm> get() {
-        var mergeRequestInfoDtos = executeGitLabApi();
+    public List<MrInfoForm> get(String accessToken) {
+        var mergeRequestInfoDtos = executeGitLabApi(accessToken);
         return mergeRequestInfoDtos.stream()
                 .collect(Collectors.groupingBy(
                                 e -> Objects.isNull(e.getAssignee()) ?
@@ -32,8 +32,8 @@ public class MergeRequestService {
                 .toList();
     }
 
-    private List<GitLabMergeRequestApiResponseDto> executeGitLabApi() {
-        return gitLabApiExecutor.getMergeRequests();
+    private List<GitLabMergeRequestApiResponseDto> executeGitLabApi(String accessToken) {
+        return gitLabApiExecutor.getMergeRequests(accessToken);
     }
 
     private MrInfoForm generateForm(List<GitLabMergeRequestApiResponseDto> responseDtos) {

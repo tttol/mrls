@@ -23,7 +23,9 @@ public class MrListController {
     public String list(Model model,
                        @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient,
                        @AuthenticationPrincipal OAuth2User oAuth2User) {
-        model.addAttribute("mrInfoFormList", mergeRequestService.get());
+        model.addAttribute("mrInfoFormList", mergeRequestService.get(oAuth2AuthorizedClient.getAccessToken().getTokenValue()));
+
+        // TODO headerにログインユーザー情報出す？interceptorに共通化できないか？
         model.addAttribute("userName", oAuth2User.getName());
         model.addAttribute("clientName", oAuth2AuthorizedClient.getClientRegistration().getClientName());
         model.addAttribute("userAttributes", oAuth2User.getAttributes());

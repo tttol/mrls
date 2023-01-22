@@ -23,16 +23,13 @@ public class GitLabApiExecutor {
 
     @Value("${app.gitlab.api.endpoint}")
     private String endpoint;
-    @Value("${app.gitlab.project.accessToken}")
-    private String projectAccessToken;
 
-    public List<GitLabMergeRequestApiResponseDto> getMergeRequests() {
-        // TODO 例外処理
+    public List<GitLabMergeRequestApiResponseDto> getMergeRequests(String accessToken) {
         try {
             var requestEntity = RequestEntity
                     .get(new URI(endpoint))
                     .accept(MediaType.APPLICATION_JSON)
-                    .header("Authorization", "Bearer %s".formatted(projectAccessToken))
+                    .header("Authorization", "Bearer %s".formatted(accessToken))
                     .build();
             log.info("api url -> {}", requestEntity.getUrl());
             var responseEntity = restTemplate.exchange(requestEntity, GitLabMergeRequestApiResponseDto[].class);
