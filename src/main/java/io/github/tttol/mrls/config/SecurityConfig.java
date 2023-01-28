@@ -11,13 +11,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         http
-//                .formLogin(login -> login
-//                                .loginProcessingUrl("/login")
-////                        .loginPage("/login") //カスタムのログインページを指定する場合
-//                                .defaultSuccessUrl("/list")
-//                                .failureUrl("/login?error")
-//                                .permitAll()
-//                )
+                .formLogin(login -> login
+                                .loginProcessingUrl("/login")
+//                        .loginPage("/login") //カスタムのログインページを指定する場合
+                                .defaultSuccessUrl("/list")
+                                .failureUrl("/login?error")
+                                .permitAll()
+                )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
                 )
