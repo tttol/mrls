@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class MrListController {
 
-  private final MergeRequestService mergeRequestService;
+    private final MergeRequestService mergeRequestService;
 
-  @GetMapping("/pat") // Project Access Toekn
-  public String pat(Model model) {
-    model.addAttribute("mrInfoFormList", mergeRequestService.get(StringUtils.EMPTY));
-    return "list";
-  }
+    @GetMapping("/pat") // Project Access Toekn
+    public String pat(Model model) {
+        model.addAttribute("mrInfoFormList", mergeRequestService.get(StringUtils.EMPTY));
+        return "list";
+    }
 
-  @GetMapping("/ot") // OAuth 2.0 token
-  public String ot(Model model) {
-    model.addAttribute("mrInfoFormList", mergeRequestService.get("dummy"));
-    return "list";
-  }
+    @GetMapping("/ot") // OAuth 2.0 token
+    public String ot(Model model) {
+        model.addAttribute("mrInfoFormList", mergeRequestService.get("dummy"));
+        return "list";
+    }
 }

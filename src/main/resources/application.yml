@@ -1,13 +1,8 @@
-spring:
-  thymeleaf:
-    cache: false # アプリリロードなしで変更を反映
-    cache-period: 0
-    prefix: file:src/main/resources/templates/
 app:
   gitlab:
     project:
-      id:
-      accessToken:
+      id: ${GITLAB_PROJECT_ID}
+      accessToken: ${GITLAB_ACCESS_TOKEN}
     api:
       endpoint: https://gitlab.com/api/v4/projects/${app.gitlab.project.id}/merge_requests
 logging:

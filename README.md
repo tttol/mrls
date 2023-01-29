@@ -5,25 +5,28 @@ GitLabからMergeRequestを取得して一覧表示する（
 
 # Get Started
 
-1. application-env.ymlをコピーしてapplication-local.yml作成
+## Pull from Docker
+
+TBD
+
+## Create Docker image and run container on your local
+
+1. クローン
 
 ```bash
 git clone https://github.com/tttol/mrls.git
-cd mrls/src/main/resources/ 
-cp application-env.yml application-local.yml
+cd mrls
 ```
 
-2. application-local.ymlの以下を編集
+2. Dockerイメージ作成 -> `./gradlew bootBuildImage`
+3. コンテナ起動
+   -> `docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx -it -p 8888:8080 mrls`
 
-- `${app.gitlab.project.id}`
-    - GitLabプロジェクトのプロジェクトID
-    - Project -> Settings -> General -> Project ID
-- `${app.gitlab.project.accessToken}`
-    - Gitlabプロジェクトアクセストークン
-    - Project -> Settings -> Access Tokens
-
-3. アプリ起動
-
-```bash
-./gradlew bootRun -Dspring.profiles.active=local
-```
+- GITLAB_PROJECT_ID
+    - GitLabのプロジェクトID
+- GITLAB_ACCESS_TOKEN
+    - GitLabのアクセストークン
+    - project access token / personal access token / group access token
+    - scope=`api`
+        - `/merge_requests`APIが実行できる権限であればOK
+    - More info -> https://docs.gitlab.com/ee/api/rest/
