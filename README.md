@@ -20,8 +20,13 @@ cd mrls
 
 2. Dockerイメージ作成 -> `./gradlew bootBuildImage`
 3. コンテナ起動
-   -> `docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx -it -p 8888:8080 mrls`
 
+```bash
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 mrls
+```
+
+- GITLAB_HOST
+    - GitLabのhost
 - GITLAB_PROJECT_ID
     - GitLabのプロジェクトID
 - GITLAB_ACCESS_TOKEN
