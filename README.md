@@ -28,7 +28,11 @@ git clone https://github.com/tttol/mrls.git
 cd mrls
 ```
 
-2. Dockerイメージ作成 -> `./gradlew bootBuildImage`
+2. Dockerイメージ作成 -> 
+```bash
+./gradlew bootBuildImage
+```
+
 3. コンテナ起動
 
 ```bash
