@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Data
@@ -30,22 +30,22 @@ public class GitLabMergeRequestApiResponseDto {
     String state;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    LocalDateTime createdAt;
+    OffsetDateTime createdAt;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    LocalDateTime updatedAt;
+    OffsetDateTime updatedAt;
 
     String mergedBy;
 
     String mergeUser;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    LocalDateTime mergedAt;
+    OffsetDateTime mergedAt;
 
     String closedBy;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    LocalDateTime closedAt;
+    OffsetDateTime closedAt;
 
     String targetBranch;
 

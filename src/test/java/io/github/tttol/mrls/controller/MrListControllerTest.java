@@ -12,7 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -36,13 +37,13 @@ public class MrListControllerTest {
     public void init() {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
 
-        var assignee = UserDto.builder()
+        final var assignee = UserDto.builder()
                 .id(1)
                 .username("assignee_username1")
                 .name("assignee_name1")
                 .state("active")
                 .build();
-        var mergeRequestInfoDtos = List.of(
+        final var mergeRequestInfoDtos = List.of(
                 GitLabMergeRequestApiResponseDto.builder()
                         .assignee(assignee)
                         .author(UserDto.builder()
@@ -53,8 +54,8 @@ public class MrListControllerTest {
                                 .build())
                         .webUrl("url1")
                         .title("title1")
-                        .createdAt(LocalDateTime.of(1970, 1, 1, 0, 0, 0))
-                        .updatedAt(LocalDateTime.of(2000, 1, 1, 0, 0, 0))
+                        .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                        .updatedAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
                         .build(),
                 GitLabMergeRequestApiResponseDto.builder()
                         .assignee(assignee)
@@ -66,8 +67,8 @@ public class MrListControllerTest {
                                 .build())
                         .webUrl("url2")
                         .title("title2")
-                        .createdAt(LocalDateTime.of(1970, 1, 1, 0, 0, 0))
-                        .updatedAt(LocalDateTime.of(2000, 1, 1, 0, 0, 0))
+                        .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                        .updatedAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
                         .build(),
                 GitLabMergeRequestApiResponseDto.builder()
                         .assignee(assignee)
@@ -79,8 +80,8 @@ public class MrListControllerTest {
                                 .build())
                         .webUrl("url3")
                         .title("title3")
-                        .createdAt(LocalDateTime.of(1970, 1, 1, 0, 0, 0))
-                        .updatedAt(LocalDateTime.of(2000, 1, 1, 0, 0, 0))
+                        .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
+                        .updatedAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
                         .build()
         );
         doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
