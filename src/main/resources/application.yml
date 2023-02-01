@@ -5,7 +5,7 @@ app:
       id: ${GITLAB_PROJECT_ID}
       accessToken: ${GITLAB_ACCESS_TOKEN}
     api:
-      endpoint: https://${app.gitlab.host}/api/v4/projects/${app.gitlab.project.id}/merge_requests
+      endpoint: https://${app.gitlab.host}/api/v4/projects/${app.gitlab.project.id}/merge_requests?state=opened
 logging:
   level:
     root: INFO
