@@ -28,7 +28,7 @@ docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xx
         - `/merge_requests`APIが実行できる権限であればOK
     - More info -> https://docs.gitlab.com/ee/api/rest/
 
-# Run container on your local
+# (optional)Run container on your local
 
 1. clone
 
