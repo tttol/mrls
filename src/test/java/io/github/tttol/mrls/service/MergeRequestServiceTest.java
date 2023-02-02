@@ -68,19 +68,6 @@ public class MergeRequestServiceTest {
                     GitLabMergeRequestApiResponseDto.builder()
                             .assignee(assignee)
                             .author(UserDto.builder()
-                                    .id(11)
-                                    .username("author_username12")
-                                    .name("author_name12")
-                                    .state("active")
-                                    .build())
-                            .webUrl("url2")
-                            .title("title2")
-                            .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
-                            .updatedAt(OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
-                            .build(),
-                    GitLabMergeRequestApiResponseDto.builder()
-                            .assignee(assignee)
-                            .author(UserDto.builder()
                                     .id(13)
                                     .username("author_username13")
                                     .name("author_name13")
@@ -89,8 +76,22 @@ public class MergeRequestServiceTest {
                             .webUrl("url3")
                             .title("title3")
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
-                            .updatedAt(OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
+                            .updatedAt(OffsetDateTime.of(2002, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
+                            .build(),
+                    GitLabMergeRequestApiResponseDto.builder()
+                            .assignee(assignee)
+                            .author(UserDto.builder()
+                                    .id(11)
+                                    .username("author_username12")
+                                    .name("author_name12")
+                                    .state("active")
+                                    .build())
+                            .webUrl("url2")
+                            .title("title2")
+                            .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
+                            .updatedAt(OffsetDateTime.of(2001, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build()
+
             );
             doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
             final var expected = List.of(new MrInfoForm(
@@ -122,7 +123,7 @@ public class MergeRequestServiceTest {
                                             null
                                     ),
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
-                                    OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
+                                    OffsetDateTime.of(2001, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
                             ),
                             new MrDetailForm(
                                     "title3",
@@ -136,7 +137,7 @@ public class MergeRequestServiceTest {
                                             null
                                     ),
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
-                                    OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
+                                    OffsetDateTime.of(2002, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
 
                             )
                     ),
