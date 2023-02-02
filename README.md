@@ -42,5 +42,5 @@ cd mrls
 3.  run container
 
 ```bash
-docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:1.1.1
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latest
 ```
