@@ -5,7 +5,7 @@ body {
 }
 
 main {
-    margin: 1% 5%;
+    margin: 1% 25%;
 }
 
 a:-webkit-any-link  {
@@ -116,7 +116,7 @@ table {
 }
 
 .authorBox {
-    margin-left: auto;
+    margin-right: 10px;
 }
 
 footer {

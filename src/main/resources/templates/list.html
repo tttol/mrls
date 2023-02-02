@@ -20,6 +20,9 @@
                         <ul class="mrList">
                             <li th:each="detailForm : ${infoForm.mrDetailForms}">
                                 <div class="mrBox">
+                                    <div class="authorBox">
+                                        <img class="authorAvatarImg" th:src="${detailForm.author.avatarUrl}"/>
+                                    </div>
                                     <div class="titleBox">
                                         <div class="mrLinkBox">
                                             <a class="mrLink" th:href="${detailForm.webUrl}"
@@ -34,9 +37,6 @@
                                             updated at:[[${#temporals.format(detailForm.updatedAt, 'yyyy/MM/dd
                                             HH:mm:ss')}]]
                                         </span>
-                                    </div>
-                                    <div class="authorBox">
-                                        <img class="authorAvatarImg" th:src="${detailForm.author.avatarUrl}"/>
                                     </div>
                                 </div>
                             </li>
