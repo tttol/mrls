@@ -5,44 +5,17 @@ GitLabからMergeRequestを取得して一覧表示する（
 
 ![ページサンプル](src/main/resources/static/img/page-sample.png)
 
-# Get Started
-
-## Pull from Docker
+# Quick Start
 
 https://hub.docker.com/r/tttol/mrls
 
-1. pull docker image
+1. pull & run docker.io/tttol/mrls:latst
 
 ```bash
-docker pull tttol/mrls
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latst
 ```
 
-2. コンテナ起動
-
-```bash
-docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:1.1.1
-```
-
-## Create Docker image and run container on your local
-
-1. クローン
-
-```bash
-git clone https://github.com/tttol/mrls.git
-cd mrls
-```
-
-2. Dockerイメージ作成 ->
-
-```bash
-./gradlew bootBuildImage
-```
-
-3. コンテナ起動
-
-```bash
-docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:1.1.1
-```
+## Environment variables
 
 - GITLAB_HOST
     - GitLabのhost
@@ -54,3 +27,24 @@ docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xx
     - scope=`api`
         - `/merge_requests`APIが実行できる権限であればOK
     - More info -> https://docs.gitlab.com/ee/api/rest/
+
+# Run container on your local
+
+1. clone
+
+```bash
+git clone https://github.com/tttol/mrls.git
+cd mrls
+```
+
+2. create docker image
+
+```bash
+./gradlew bootBuildImage
+```
+
+3. run container
+
+```bash
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latest
+```
