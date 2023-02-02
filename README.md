@@ -3,6 +3,8 @@
 GitLabからMergeRequestを取得して一覧表示する（
 ユーザー単位でgroup byして表示）
 
+![ページサンプル](src/main/resources/static/img/page-sample.png)
+
 # Get Started
 
 ## Pull from Docker
@@ -10,11 +12,13 @@ GitLabからMergeRequestを取得して一覧表示する（
 https://hub.docker.com/r/tttol/mrls
 
 1. pull docker image
+
 ```bash
 docker pull tttol/mrls
 ```
 
 2. コンテナ起動
+
 ```bash
 docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:1.1.1
 ```
@@ -28,7 +32,8 @@ git clone https://github.com/tttol/mrls.git
 cd mrls
 ```
 
-2. Dockerイメージ作成 -> 
+2. Dockerイメージ作成 ->
+
 ```bash
 ./gradlew bootBuildImage
 ```
