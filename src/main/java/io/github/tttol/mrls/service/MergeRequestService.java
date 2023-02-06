@@ -67,6 +67,8 @@ public class MergeRequestService {
                                                 )
                                         )
                                         .orElse(UserForm.empty()),
+                                e.getUpvotes(),
+                                e.getLabels(),
                                 e.getCreatedAt().withOffsetSameInstant(ZoneOffset.of("+09:00")),
                                 e.getUpdatedAt().withOffsetSameInstant(ZoneOffset.of("+09:00"))
                         )).toList();
