@@ -62,6 +62,8 @@ public class MergeRequestServiceTest {
                                     .build())
                             .webUrl("url1")
                             .title("title1")
+                            .upvotes(1)
+                            .labels(List.of("bugfix"))
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .updatedAt(OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build(),
@@ -75,6 +77,8 @@ public class MergeRequestServiceTest {
                                     .build())
                             .webUrl("url3")
                             .title("title3")
+                            .upvotes(3)
+                            .labels(List.of("hotfix"))
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .updatedAt(OffsetDateTime.of(2002, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build(),
@@ -88,6 +92,8 @@ public class MergeRequestServiceTest {
                                     .build())
                             .webUrl("url2")
                             .title("title2")
+                            .upvotes(2)
+                            .labels(List.of("modify"))
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .updatedAt(OffsetDateTime.of(2001, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build()
@@ -108,6 +114,8 @@ public class MergeRequestServiceTest {
                                             null,
                                             null
                                     ),
+                                    1,
+                                    List.of("bugfix"),
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
                                     OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
                             ),
@@ -122,6 +130,8 @@ public class MergeRequestServiceTest {
                                             null,
                                             null
                                     ),
+                                    2,
+                                    List.of("modify"),
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
                                     OffsetDateTime.of(2001, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
                             ),
@@ -136,6 +146,8 @@ public class MergeRequestServiceTest {
                                             null,
                                             null
                                     ),
+                                    3,
+                                    List.of("hotfix"),
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
                                     OffsetDateTime.of(2002, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
 
@@ -163,6 +175,8 @@ public class MergeRequestServiceTest {
                                     .build())
                             .webUrl("url1")
                             .title("title1")
+                            .upvotes(0)
+                            .labels(List.of())
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .updatedAt(OffsetDateTime.of(2000, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build()
@@ -175,6 +189,8 @@ public class MergeRequestServiceTest {
                                     "title1",
                                     "url1",
                                     new UserForm(11, "author_username11", "author_name11", "active", null, null),
+                                    0,
+                                    List.of(),
                                     OffsetDateTime.of(1970, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")),
                                     OffsetDateTime.of(2000, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00"))
                             )
