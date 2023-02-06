@@ -12,7 +12,7 @@ https://hub.docker.com/r/tttol/mrls
 1. pull & run docker.io/tttol/mrls:latst
 
 ```bash
-docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latst
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latest
 ```
 
 ## Environment variables
