@@ -133,17 +133,12 @@ table {
     padding: 2px 4px;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-}
-
 .footerBox {
     height: 30px;
     padding: 12px 12px;
 }
 
-.footerBox .appVer {
+.appVer {
     color: darkgray;
     font-size: 10pt;
 }

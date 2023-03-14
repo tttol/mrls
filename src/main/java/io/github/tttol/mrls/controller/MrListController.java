@@ -18,13 +18,13 @@ public class MrListController {
     private final MergeRequestService mergeRequestService;
 
     @GetMapping("/pat") // Project Access Toekn
-    public String pat(Model model) {
+    public String pat(final Model model) {
         model.addAttribute("mrInfoFormList", mergeRequestService.get(StringUtils.EMPTY));
         return "list";
     }
 
     @GetMapping("/ot") // OAuth 2.0 token
-    public String ot(Model model) {
+    public String ot(final Model model) {
         model.addAttribute("mrInfoFormList", mergeRequestService.get("dummy"));
         return "list";
     }
