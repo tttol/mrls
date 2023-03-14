@@ -37,7 +37,7 @@ public class GitLabMergeRequestApiResponseDto {
 
     String mergedBy;
 
-    String mergeUser;
+    Object mergeUser;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     OffsetDateTime mergedAt;
