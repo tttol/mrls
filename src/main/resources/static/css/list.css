@@ -123,6 +123,16 @@ table {
     padding-right: 10px;
 }
 
+.warning {
+    color: yellow;
+    font-weight: bold;
+}
+
+.severe {
+    color: orangered;
+    font-weight: bold;
+}
+
 .authorBox {
     margin-right: 10px;
 }
