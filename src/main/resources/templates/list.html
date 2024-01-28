@@ -65,9 +65,8 @@
                                                 <span th:text="${detailForm.upvotes}">1</span>
                                             </div>
                                         </div>
-                                        <span class="at">
-                                            created at:[[${#temporals.format(detailForm.createdAt, 'yyyy/MM/dd
-                                            HH:mm:ss')}]]
+                                        <span class="at" th:classappend="|${detailForm.createdAt.isBefore(oneWeekAgo) ? 'warning' : ''} ${detailForm.createdAt.isBefore(twoWeeksAgo) ? 'severe' : ''}|">
+                                            created at:[[${#temporals.format(detailForm.createdAt, 'yyyy/MM/dd HH:mm:ss')}]]
                                         </span>
                                         <span class="at">
                                             updated at:[[${#temporals.format(detailForm.updatedAt, 'yyyy/MM/dd
