@@ -1,3 +1,5 @@
+server:
+  port: 8081
 app:
   gitlab:
     host: host
