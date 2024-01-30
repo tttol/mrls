@@ -1,11 +1,11 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.1'
+    id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'io.github.tttol'
-version = "1.1.6"
+version = "2.0.0"
 sourceCompatibility = '17'
 
 configurations {
@@ -32,3 +32,22 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// sourceSets {
+//     main {
+//         java {
+//             srcDirs = ['app/src/main/java']
+//             resources {
+//                 srcDirs = ['app/src/main/resources']
+//             }
+//         }
+//     }
+//     test {
+//         java {
+//             srcDirs = ['app/src/test/java']
+//             resources {
+//                 srcDirs = ['app/src/test/resources']
+//             }
+//         }
+//     }
+// }
