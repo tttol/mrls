@@ -1,9 +1,9 @@
 app:
   gitlab:
-    host: ${GITLAB_HOST}
+    host: host
     project:
-      id: ${GITLAB_PROJECT_ID}
-      accessToken: ${GITLAB_ACCESS_TOKEN}
+      id: id
+      accessToken: token
     api:
       endpoint: https://${app.gitlab.host}/api/v4/projects/${app.gitlab.project.id}/merge_requests?state=opened
 logging:
