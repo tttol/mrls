@@ -1,4 +1,9 @@
+server:
+  port: 8081
 app:
+  proxy:
+    host: ${PROXY_HOST}
+    port: ${PROXY_PORT}
   gitlab:
     host: ${GITLAB_HOST}
     project:
