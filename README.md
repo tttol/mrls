@@ -10,13 +10,13 @@ GitLabからMergeRequestを取得して一覧表示する（
 https://hub.docker.com/r/tttol/mrls
 
 1. pull & run docker.io/tttol/mrls:latst
-
 ```bash
-docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latest
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx --env PROXY_HOST=xxx --env PROXY_PORT=xxx -it -p 8888:8080 tttol/mrls:latest
 ```
+> [!NOTE]
+> `PROXY_HOST` and `PROXY_PORT` is optional.
 
 ## Environment variables
-
 - GITLAB_HOST
     - GitLabのhost
 - GITLAB_PROJECT_ID
@@ -27,8 +27,10 @@ docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xx
     - scope=`api`
         - `/merge_requests`APIが実行できる権限であればOK
     - More info -> https://docs.gitlab.com/ee/api/rest/
+- PROXY_HOST (optional)
+- PROXY_PORT (optioanl)
 
-# (optional)Run container on your local
+# Run container on your local(optional)
 
 1. clone
 
@@ -46,5 +48,5 @@ cd mrls
 3. run container
 
 ```bash
-docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx -it -p 8888:8080 tttol/mrls:latest
+docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx --env PROXY_HOST=xxx --env PROXY_PORT=xxx -it -p 8888:8080 tttol/mrls:latest
 ```
