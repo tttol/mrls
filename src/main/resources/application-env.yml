@@ -1,4 +1,7 @@
 app:
+  proxy:
+    host:
+    port:
   gitlab:
     project:
       id:

@@ -22,7 +22,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@SpringBootTest(properties = {"GITLAB_PROJECT_ID=dummy",
+@SpringBootTest(properties = {
+        "PROXY_HOST=dummy.com",
+        "PROXY_PORT=80",
+        "GITLAB_PROJECT_ID=dummy",
         "GITLAB_ACCESS_TOKEN=dummy"})
 public class MrListControllerTest {
 
