@@ -14,7 +14,7 @@ https://hub.docker.com/r/tttol/mrls
 docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx --env PROXY_HOST=xxx --env PROXY_PORT=xxx -it -p 8888:8080 tttol/mrls:latest
 ```
 > [!NOTE]
-> `PROXY_HOST` and `PROXY_PORT` is optional.
+> `PROXY_HOST` and `PROXY_PORT` are optional.
 
 ## Environment variables
 - GITLAB_HOST
