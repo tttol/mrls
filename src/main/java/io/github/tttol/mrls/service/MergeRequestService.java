@@ -1,13 +1,5 @@
 package io.github.tttol.mrls.service;
 
-import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
-import io.github.tttol.mrls.external.GitLabApiExecutor;
-import io.github.tttol.mrls.form.MrDetailForm;
-import io.github.tttol.mrls.form.MrInfoForm;
-import io.github.tttol.mrls.form.UserForm;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.List;
@@ -15,21 +7,31 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
+import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
+import io.github.tttol.mrls.external.GitLabApiExecutor;
+import io.github.tttol.mrls.form.MrDetailForm;
+import io.github.tttol.mrls.form.MrInfoForm;
+import io.github.tttol.mrls.form.UserForm;
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class MergeRequestService {
 
     private final GitLabApiExecutor gitLabApiExecutor;
+    private final int NONE_ASSIGNEE = -1;
 
     public List<MrInfoForm> get(final String accessToken) {
         final var mergeRequestInfoDtos = executeGitLabApi(accessToken);
         return mergeRequestInfoDtos.stream()
                 .collect(Collectors.groupingBy(
                                 e -> Objects.isNull(e.getAssignee()) ?
-                                        e.getAuthor().getId() : e.getAssignee().getId()
+                                        NONE_ASSIGNEE : e.getAssignee().getId()
                         )
                 )
-                .values().stream().map(this::generateForm)
+                .values().stream().map(this::generateMrInfoForm)
                 .sorted(Comparator.comparing(e -> e.assignee().id()))
                 .toList();
     }
@@ -38,7 +40,7 @@ public class MergeRequestService {
         return gitLabApiExecutor.getMergeRequests(accessToken);
     }
 
-    private MrInfoForm generateForm(final List<GitLabMergeRequestApiResponseDto> responseDtos) {
+    private MrInfoForm generateMrInfoForm(final List<GitLabMergeRequestApiResponseDto> responseDtos) {
         final var responseDto = responseDtos.stream().findAny().orElseThrow();
         final var assigneeForm = Optional.ofNullable(responseDto.getAssignee())
                 .map(assignee -> new UserForm(
