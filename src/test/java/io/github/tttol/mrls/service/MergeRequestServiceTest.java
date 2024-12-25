@@ -1,23 +1,28 @@
 package io.github.tttol.mrls.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
 import io.github.tttol.mrls.dto.UserDto;
 import io.github.tttol.mrls.external.GitLabApiExecutor;
 import io.github.tttol.mrls.form.MrDetailForm;
 import io.github.tttol.mrls.form.MrInfoForm;
 import io.github.tttol.mrls.form.UserForm;
-import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
 
 public class MergeRequestServiceTest {
 
@@ -164,17 +169,31 @@ public class MergeRequestServiceTest {
         @Test
         @DisplayName("MRのAssigneeが未指定の場合")
         void noAssigneeTest() {
+            final var assignee = UserDto.builder()
+                .id(11)
+                .username("author_username11")
+                .name("author_name11")
+                .state("active")
+                .build();
             final var mergeRequestInfoDtos = List.of(
+                    // authors are same
+                    // assignee is null
                     GitLabMergeRequestApiResponseDto.builder()
                             .assignee(null)
-                            .author(UserDto.builder()
-                                    .id(11)
-                                    .username("author_username11")
-                                    .name("author_name11")
-                                    .state("active")
-                                    .build())
+                            .author(assignee)
                             .webUrl("url1")
                             .title("title1")
+                            .upvotes(0)
+                            .labels(List.of())
+                            .createdAt(OffsetDateTime.of(1970, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
+                            .updatedAt(OffsetDateTime.of(2000, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
+                            .build(),
+                    // assignee is author_username11 
+                    GitLabMergeRequestApiResponseDto.builder()
+                            .assignee(assignee)
+                            .author(assignee)
+                            .webUrl("url2")
+                            .title("title2")
                             .upvotes(0)
                             .labels(List.of())
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
@@ -182,7 +201,8 @@ public class MergeRequestServiceTest {
                             .build()
             );
             doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
-            final var expected = List.of(new MrInfoForm(
+            final var expected = List.of(
+                new MrInfoForm(
                     UserForm.empty(),
                     List.of(
                             new MrDetailForm(
@@ -196,7 +216,23 @@ public class MergeRequestServiceTest {
                             )
                     ),
                     1
-            ));
+                ),
+                new MrInfoForm(
+                    new UserForm(11, "author_username11", "author_name11", "active", null, null),
+                    List.of(
+                                new MrDetailForm(
+                                        "title2",
+                                        "url2",
+                                        new UserForm(11, "author_username11", "author_name11", "active", null, null),
+                                        0,
+                                        List.of(),
+                                        OffsetDateTime.of(1970, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")),
+                                        OffsetDateTime.of(2000, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00"))
+                                )
+                    ),
+                    1
+                )
+            );
 
             final var actual = mergeRequestService.get(anyString());
 
