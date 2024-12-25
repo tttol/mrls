@@ -50,3 +50,9 @@ cd mrls
 ```bash
 docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xxxx --env GITLAB_HOST=xxx --env PROXY_HOST=xxx --env PROXY_PORT=xxx -it -p 8888:8080 tttol/mrls:latest
 ```
+
+# Release
+Run the following command.
+```bash
+sh docker/release.sh 1.0.0 # specify app version at arg 
+```
