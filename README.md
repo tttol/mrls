@@ -52,7 +52,31 @@ docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xx
 ```
 
 # Release
-Run the following command.
+1. Update build.gradle, list.html
+```diff
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'io.github.tttol'
+- version = "1.1.7"
++ version = "1.1.8"
+```
+
+```diff
+-             <div class="appVer">1.1.7</div>
++             <div class="appVer">1.1.8</div>
+        </main>
+    </body>
+</html>
+```
+
+2. Run the following command.
 ```bash
 sh docker/release.sh 1.0.0 # specify app version at arg 
 ```
+
+3. Create a tag in GitHub.
+https://github.com/tttol/mrls/releases
