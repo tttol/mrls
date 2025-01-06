@@ -34,7 +34,7 @@ public class GitLabApiExecutor {
       var responseEntity = restClient.get()
           .uri(new URI(endpoint))
           .accept(MediaType.APPLICATION_JSON)
-          .header("Authorization", "Bearer %s".formatted(token))
+          .header("PRIVATE-TOKEN", token)
           .retrieve()
           .toEntity(GitLabMergeRequestApiResponseDto[].class);
       
