@@ -1,31 +1,51 @@
 classDiagram
+    direction LR
     namespace controller {
-      class MrListController
+      class RequestListController
     }
     namespace service {
-      class IMergeRequestService {
-        + getMergeRequests(accessToken: String): List<MrInfoForm>
+      class IRequestService {
+        + getMergeRequests(accessToken: String): List<RequestInfoForm>
       }
 
-      class MergeRequestServiceImpl {
+      class GitLabMergeRequestServiceImpl {
         - gitLabApiExecutor: GitLabApiExecutor
-        - NONE_ASSIGNEE: int
-        + getMergeRequests(accessToken: String): List<MrInfoForm>
+        + getMergeRequests(accessToken: String): List<RequestInfoForm>
         + executeGitLabApi(accessToken: String): List<GitLabMergeRequestApiResponseDto>
-        + generateMrInfoForm(responseDtos: List<GitLabMergeRequestApiResponseDto>): MrInfoForm
+        + generateRequestInfoForm(responseDtos: List<GitLabMergeRequestApiResponseDto>): RequestInfoForm
       }
     }
     namespace external {
-      class IGitLabApiExecutor {
-        + getMergeRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
+      class IApiExecutor {
+        + getRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
       }
 
       class GitLabApiExecutorImpl {
-        + getMergeRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
+        + getRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
       }
     }
 
-    MrListController --> IMergeRequestService : uses
-    MergeRequestServiceImpl --|> IMergeRequestService
-    MergeRequestServiceImpl --> IGitLabApiExecutor
-    GitLabApiExecutorImpl --|> IGitLabApiExecutor
+    namespace presentation {
+      class IPresenter {
+        + toForm (requestDto: IRequest): RequestInfoForm
+      }
+
+      class GitLabMergeRequestPresenter {
+        + toForm (requestDto: IRequest): RequestInfoForm
+      }
+    }
+
+    %% controller
+    RequestListController --> IRequestService
+    RequestListController --> IPresenter
+
+    %% service
+    GitLabMergeRequestServiceImpl --|> IRequestService
+    GitLabMergeRequestServiceImpl --> IApiExecutor
+
+    %% external
+    GitLabApiExecutorImpl --|> IApiExecutor
+
+    %% presentation
+    GitLabMergeRequestPresenter --|> IPresenter
+

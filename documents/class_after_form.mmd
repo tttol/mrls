@@ -1,0 +1,46 @@
+classDiagram
+        namespace form {
+      class RequestInfoForm {
+        + assignee: UserForm
+        + requestDetailForms: List<RequestDetailForm>
+        + assignedMrCount: int
+      }
+
+      class RequestDetailForm {
+        + id: String
+        + title: String
+        + url: String
+        + author: UserForm
+        + upvotes: int
+        + labels: List<String>
+        + createdAt: OffsetDateTime
+        + updatedAt: OffsetDateTime
+      }
+
+      class UserForm {
+        + id: int
+        + username: String
+        + name: String
+        + avatarUrl: String
+      }
+    }
+
+    namespace dto {
+      class GitLabMergeRequestApiResponseDto {
+      }
+
+      class UserDto {
+
+      }
+
+      class IRequest {
+        + toForm(requestDto: IRequest): RequestInfoForm
+      }
+    }
+
+    %% dto
+    GitLabMergeRequestApiResponseDto --|> IRequest
+    %% form
+    RequestInfoForm --> RequestDetailForm : uses
+    RequestInfoForm --> UserForm : uses
+    RequestDetailForm --> UserForm : uses
