@@ -2,6 +2,8 @@ package io.github.tttol.mrls.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+import io.github.tttol.mrls.form.MrInfoForm;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class GitLabMergeRequestApiResponseDto {
+public class GitLabMergeRequestApiResponseDto implements IRequest {
     int id;
 
     int iid;
@@ -115,4 +117,10 @@ public class GitLabMergeRequestApiResponseDto {
     boolean blockingDiscussionsResolved;
 
     String approvals_before_merge;
+
+    @Override
+    public List<MrInfoForm> toForm() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toForm'");
+    }
 }

@@ -39,7 +39,7 @@ public class MergeRequestServiceTest {
     }
 
     @InjectMocks
-    private MergeRequestService mergeRequestService;
+    private GitLabMergeRequestServiceImpl mergeRequestService;
 
     @Mock
     private GitLabApiExecutor gitLabApiExecutor;
@@ -188,7 +188,7 @@ public class MergeRequestServiceTest {
                             .createdAt(OffsetDateTime.of(1970, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .updatedAt(OffsetDateTime.of(2000, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build(),
-                    // assignee is author_username11 
+                    // assignee is author_username11
                     GitLabMergeRequestApiResponseDto.builder()
                             .assignee(assignee)
                             .author(assignee)

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
+import io.github.tttol.mrls.dto.IRequest;
 import io.github.tttol.mrls.external.GitLabApiExecutor;
 import io.github.tttol.mrls.form.MrDetailForm;
 import io.github.tttol.mrls.form.MrInfoForm;
@@ -18,26 +19,29 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MergeRequestService {
+public class GitLabMergeRequestServiceImpl implements IRequestService {
 
     private final GitLabApiExecutor gitLabApiExecutor;
-    private final int NONE_ASSIGNEE = -1;
+//     private final int NONE_ASSIGNEE = -1;
 
-    public List<MrInfoForm> get(final String accessToken) {
-        final var mergeRequestInfoDtos = executeGitLabApi(accessToken);
-        return mergeRequestInfoDtos.stream()
-                .collect(Collectors.groupingBy(
-                                e -> Objects.isNull(e.getAssignee()) ?
-                                        NONE_ASSIGNEE : e.getAssignee().getId()
-                        )
-                )
-                .values().stream().map(this::generateMrInfoForm)
-                .sorted(Comparator.comparing(e -> e.assignee().id()))
-                .toList();
+    @Override
+    public List<IRequest> getRequests() {
+        var mergeRequests = executeGitLabApi();
+        return mergeRequests.stream().map(mr -> (IRequest) mr).toList();
+
+        // return mergeRequestInfoDtos.stream()
+        //         .collect(Collectors.groupingBy(
+        //                         e -> Objects.isNull(e.getAssignee()) ?
+        //                                 NONE_ASSIGNEE : e.getAssignee().getId()
+        //                 )
+        //         )
+        //         .values().stream().map(this::generateMrInfoForm)
+        //         .sorted(Comparator.comparing(e -> e.assignee().id()))
+        //         .toList();
     }
 
-    private List<GitLabMergeRequestApiResponseDto> executeGitLabApi(final String accessToken) {
-        return gitLabApiExecutor.getMergeRequests(accessToken);
+    private List<GitLabMergeRequestApiResponseDto> executeGitLabApi() {
+        return gitLabApiExecutor.getRequests();
     }
 
     private MrInfoForm generateMrInfoForm(final List<GitLabMergeRequestApiResponseDto> responseDtos) {
@@ -76,4 +80,5 @@ public class MergeRequestService {
                         )).toList();
         return new MrInfoForm(assigneeForm, linkForms, linkForms.size());
     }
+
 }
