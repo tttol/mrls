@@ -1,0 +1,31 @@
+classDiagram
+    namespace controller {
+      class MrListController
+    }
+    namespace service {
+      class IMergeRequestService {
+        + getMergeRequests(accessToken: String): List<MrInfoForm>
+      }
+
+      class MergeRequestServiceImpl {
+        - gitLabApiExecutor: GitLabApiExecutor
+        - NONE_ASSIGNEE: int
+        + getMergeRequests(accessToken: String): List<MrInfoForm>
+        + executeGitLabApi(accessToken: String): List<GitLabMergeRequestApiResponseDto>
+        + generateMrInfoForm(responseDtos: List<GitLabMergeRequestApiResponseDto>): MrInfoForm
+      }
+    }
+    namespace external {
+      class IGitLabApiExecutor {
+        + getMergeRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
+      }
+
+      class GitLabApiExecutorImpl {
+        + getMergeRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
+      }
+    }
+
+    MrListController --> IMergeRequestService : uses
+    MergeRequestServiceImpl --|> IMergeRequestService
+    MergeRequestServiceImpl --> IGitLabApiExecutor
+    GitLabApiExecutorImpl --|> IGitLabApiExecutor
