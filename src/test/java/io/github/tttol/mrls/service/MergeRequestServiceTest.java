@@ -1,7 +1,6 @@
 package io.github.tttol.mrls.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
 import java.time.OffsetDateTime;
@@ -104,7 +103,7 @@ public class MergeRequestServiceTest {
                             .build()
 
             );
-            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
+            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getRequests();
             final var expected = List.of(new MrInfoForm(
                     new UserForm(1, "assignee_username1", "assignee_name1", "active", null, null),
                     List.of(
@@ -161,7 +160,7 @@ public class MergeRequestServiceTest {
                     3
             ));
 
-            final var actual = mergeRequestService.get(anyString());
+            final var actual = mergeRequestService.getRequests();
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
         }
@@ -200,7 +199,7 @@ public class MergeRequestServiceTest {
                             .updatedAt(OffsetDateTime.of(2000, 1, 1, 9, 0, 0, 0, ZoneOffset.of("+09:00")))
                             .build()
             );
-            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
+            doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getRequests();
             final var expected = List.of(
                 new MrInfoForm(
                     UserForm.empty(),
@@ -234,7 +233,7 @@ public class MergeRequestServiceTest {
                 )
             );
 
-            final var actual = mergeRequestService.get(anyString());
+            final var actual = mergeRequestService.getRequests();
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
         }
@@ -242,9 +241,9 @@ public class MergeRequestServiceTest {
         @Test
         @DisplayName("MR0件の場合")
         void noMrTest() {
-            doReturn(List.of()).when(gitLabApiExecutor).getMergeRequests(anyString());
+            doReturn(List.of()).when(gitLabApiExecutor).getRequests();
             final var expected = List.of();
-            final var actual = mergeRequestService.get(anyString());
+            final var actual = mergeRequestService.getRequests();
 
             assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
         }

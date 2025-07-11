@@ -2,8 +2,8 @@ package io.github.tttol.mrls.service;
 
 import java.util.List;
 
-import io.github.tttol.mrls.dto.IRequest;
+import io.github.tttol.mrls.dto.RequestDto;
 
 public interface IRequestService {
-    List<IRequest> getRequests();
+    List<RequestDto> getRequests();
 }

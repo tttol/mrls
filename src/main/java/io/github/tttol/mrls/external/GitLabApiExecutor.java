@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
-import io.github.tttol.mrls.dto.IRequest;
+import io.github.tttol.mrls.dto.RequestDto;
 import io.github.tttol.mrls.exception.GitLabApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class GitLabApiExecutor implements IApiExecutor {
   private String projectAccessToken;
 
   @Override
-  public List<IRequest> getRequests() {
+  public List<RequestDto> getRequests() {
     try {
       if (StringUtils.isBlank(projectAccessToken)) {
         throw new GitLabApiException("projectAccessToken must not be blank.");
@@ -43,14 +43,31 @@ public class GitLabApiExecutor implements IApiExecutor {
           .retrieve()
           .toEntity(GitLabMergeRequestApiResponseDto[].class);
 
-      if (responseEntity != null) {
-        log.info("status code -> {}", responseEntity.getStatusCode());
-        var body = responseEntity.getBody();
-        return Objects.isNull(body) ? List.of() : Arrays.asList(body);
-      }
-      return List.of();
+      log.info("status code -> {}", responseEntity.getStatusCode());
+      var body = responseEntity.getBody();
+      return Objects.isNull(body) ? List.of() : convertToRequestDto(Arrays.asList(body));
     } catch (Exception e) {
       throw new GitLabApiException(e);
     }
+  }
+
+  /**
+   * Parsing into a list of {@link GitLabMergeRequestApiResponseDto} and then mapped to {@link RequestDto}.
+   *
+   * @return a list of {@link RequestDto}
+   */
+  private List<RequestDto> convertToRequestDto(final List<GitLabMergeRequestApiResponseDto> responseDtos) {
+    return responseDtos.stream()
+        .map(r -> new RequestDto(
+            r.getId(),
+            r.getTitle(),
+            r.getCreatedAt(),
+            r.getUpdatedAt(),
+            r.getUpvotes(),
+            r.getAuthor(),
+            r.getAssignee(),
+            r.getLabels(),
+            r.getWebUrl()))
+        .toList();
   }
 }

@@ -15,11 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RequestListController {
 
-    private final IRequestService mergeRequestService;
+    private final IRequestService gitlabMergeRequestService;
 
     @GetMapping("/pat") // Project Access Toekn
     public String pat(final Model model) {
-        model.addAttribute("mrInfoFormList", mergeRequestService.getRequests());
+        model.addAttribute("mrInfoFormList", gitlabMergeRequestService.getRequests());
         model.addAttribute("oneWeekAgo", OffsetDateTime.now().minusDays(7));
         model.addAttribute("twoWeeksAgo", OffsetDateTime.now().minusDays(14));
         return "list";

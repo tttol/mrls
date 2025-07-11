@@ -87,7 +87,7 @@ public class MrListControllerTest {
                         .updatedAt(OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC))
                         .build()
         );
-        doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getMergeRequests(anyString());
+        doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getRequests();
     }
 
     @Test
