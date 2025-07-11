@@ -10,24 +10,24 @@
     <body>
         <div th:replace="fragment/header::header"></div>
         <main>
-            <table class="mrTable">
-                <tr class="assigneeBox" th:each="infoForm : ${mrInfoFormList}">
+            <table class="requestTable">
+                <tr class="assigneeBox" th:each="infoForm : ${requestInfoFormList}">
                     <td>
                         <div class="avatar">
                             <img class="assigneeAvatarImg" th:src="${infoForm.assignee.avatarUrl}"/>
-                            <span class="badge" th:text="${infoForm.assignedMrCount}">1</span>
+                            <span class="badge" th:text="${infoForm.assignedRequestCount}">1</span>
                         </div>
                     </td>
                     <td>
-                        <ul class="mrList">
-                            <li th:each="detailForm : ${infoForm.mrDetailForms}">
-                                <div class="mrBox">
+                        <ul class="requestList">
+                            <li th:each="detailForm : ${infoForm.requestDetailForms}">
+                                <div class="requestBox">
                                     <div class="authorBox">
                                         <img class="authorAvatarImg" th:src="${detailForm.author.avatarUrl}"/>
                                     </div>
                                     <div class="titleBox">
-                                        <div class="mrLinkBox">
-                                            <a class="mrLink" th:href="${detailForm.webUrl}"
+                                        <div class="requestLinkBox">
+                                            <a class="requestLink" th:href="${detailForm.url}"
                                                th:text="${detailForm.title}"
                                                target="_blank">MRタイトル</a>
                                             <div class="upvotes">

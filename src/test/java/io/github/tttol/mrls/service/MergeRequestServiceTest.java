@@ -19,8 +19,8 @@ import org.mockito.MockitoAnnotations;
 import io.github.tttol.mrls.dto.GitLabMergeRequestApiResponseDto;
 import io.github.tttol.mrls.dto.UserDto;
 import io.github.tttol.mrls.external.GitLabApiExecutor;
-import io.github.tttol.mrls.form.MrDetailForm;
-import io.github.tttol.mrls.form.MrInfoForm;
+import io.github.tttol.mrls.form.RequestDetailForm;
+import io.github.tttol.mrls.form.RequestInfoForm;
 import io.github.tttol.mrls.form.UserForm;
 
 public class MergeRequestServiceTest {
@@ -104,10 +104,10 @@ public class MergeRequestServiceTest {
 
             );
             doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getRequests();
-            final var expected = List.of(new MrInfoForm(
+            final var expected = List.of(new RequestInfoForm(
                     new UserForm(1, "assignee_username1", "assignee_name1", "active", null, null),
                     List.of(
-                            new MrDetailForm(
+                            new RequestDetailForm(
                                     "title1",
                                     "url1",
                                     new UserForm(
@@ -123,7 +123,7 @@ public class MergeRequestServiceTest {
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
                                     OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
                             ),
-                            new MrDetailForm(
+                            new RequestDetailForm(
                                     "title2",
                                     "url2",
                                     new UserForm(
@@ -139,7 +139,7 @@ public class MergeRequestServiceTest {
                                     OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00")),
                                     OffsetDateTime.of(2001, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+09:00"))
                             ),
-                            new MrDetailForm(
+                            new RequestDetailForm(
                                     "title3",
                                     "url3",
                                     new UserForm(
@@ -201,10 +201,10 @@ public class MergeRequestServiceTest {
             );
             doReturn(mergeRequestInfoDtos).when(gitLabApiExecutor).getRequests();
             final var expected = List.of(
-                new MrInfoForm(
+                new RequestInfoForm(
                     UserForm.empty(),
                     List.of(
-                            new MrDetailForm(
+                            new RequestDetailForm(
                                     "title1",
                                     "url1",
                                     new UserForm(11, "author_username11", "author_name11", "active", null, null),
@@ -216,10 +216,10 @@ public class MergeRequestServiceTest {
                     ),
                     1
                 ),
-                new MrInfoForm(
+                new RequestInfoForm(
                     new UserForm(11, "author_username11", "author_name11", "active", null, null),
                     List.of(
-                                new MrDetailForm(
+                                new RequestDetailForm(
                                         "title2",
                                         "url2",
                                         new UserForm(11, "author_username11", "author_name11", "active", null, null),
