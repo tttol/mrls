@@ -5,33 +5,25 @@ classDiagram
     }
     namespace service {
       class IRequestService {
-        + getMergeRequests(accessToken: String): List<RequestInfoForm>
       }
 
-      class GitLabMergeRequestServiceImpl {
-        - gitLabApiExecutor: GitLabApiExecutor
-        + getMergeRequests(accessToken: String): List<RequestInfoForm>
-        + executeGitLabApi(accessToken: String): List<GitLabMergeRequestApiResponseDto>
-        + generateRequestInfoForm(responseDtos: List<GitLabMergeRequestApiResponseDto>): RequestInfoForm
+      class GitLabRequestServiceImpl {
       }
     }
     namespace external {
       class IApiExecutor {
-        + getRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
       }
 
       class GitLabApiExecutorImpl {
-        + getRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
       }
     }
 
     namespace presentation {
       class IPresenter {
-        + toForm (requestDto: IRequest): RequestInfoForm
+
       }
 
-      class GitLabMergeRequestPresenter {
-        + toForm (requestDto: IRequest): RequestInfoForm
+      class GitLabPresenter {
       }
     }
 
@@ -40,12 +32,12 @@ classDiagram
     RequestListController --> IPresenter
 
     %% service
-    GitLabMergeRequestServiceImpl --|> IRequestService
-    GitLabMergeRequestServiceImpl --> IApiExecutor
+    GitLabRequestServiceImpl --|> IRequestService
+    GitLabRequestServiceImpl --> IApiExecutor
 
     %% external
     GitLabApiExecutorImpl --|> IApiExecutor
 
     %% presentation
-    GitLabMergeRequestPresenter --|> IPresenter
+    GitLabPresenter --|> IPresenter
 
