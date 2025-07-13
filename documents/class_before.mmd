@@ -1,0 +1,13 @@
+classDiagram
+    namespace controller {
+      class MrListController
+    }
+    namespace service {
+      class MergeRequestService
+    }
+    namespace external {
+      class GitLabApiExecutor
+    }
+
+    MrListController --> MergeRequestService : uses
+    MergeRequestService --> GitLabApiExecutor : uses

@@ -1,12 +1,12 @@
 app:
   proxy:
-    host: ${PROXY_HOST}
-    port: ${PROXY_PORT}
+    host: ${PROXY_HOST:""}
+    port: ${PROXY_PORT:0}
   gitlab:
-    host: ${GITLAB_HOST}
+    host: ${GITLAB_HOST:""}
     project:
-      id: ${GITLAB_PROJECT_ID}
-      accessToken: ${GITLAB_ACCESS_TOKEN}
+      id: ${GITLAB_PROJECT_ID:0}
+      accessToken: ${GITLAB_ACCESS_TOKEN:""}
     api:
       endpoint: https://${app.gitlab.host}/api/v4/projects/${app.gitlab.project.id}/merge_requests?state=opened
 logging:

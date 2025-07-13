@@ -1,0 +1,43 @@
+classDiagram
+    direction LR
+    namespace controller {
+      class RequestListController
+    }
+    namespace service {
+      class IRequestService {
+      }
+
+      class GitLabRequestServiceImpl {
+      }
+    }
+    namespace external {
+      class IApiExecutor {
+      }
+
+      class GitLabApiExecutorImpl {
+      }
+    }
+
+    namespace presentation {
+      class IPresenter {
+
+      }
+
+      class GitLabPresenter {
+      }
+    }
+
+    %% controller
+    RequestListController --> IRequestService
+    RequestListController --> IPresenter
+
+    %% service
+    GitLabRequestServiceImpl --|> IRequestService
+    GitLabRequestServiceImpl --> IApiExecutor
+
+    %% external
+    GitLabApiExecutorImpl --|> IApiExecutor
+
+    %% presentation
+    GitLabPresenter --|> IPresenter
+
