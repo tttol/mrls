@@ -1,31 +1,43 @@
 classDiagram
+    direction LR
     namespace controller {
-      class MrListController
+      class RequestListController
     }
     namespace service {
-      class IMergeRequestService {
-        + getMergeRequests(accessToken: String): List<MrInfoForm>
+      class IRequestService {
       }
 
-      class MergeRequestServiceImpl {
-        - gitLabApiExecutor: GitLabApiExecutor
-        - NONE_ASSIGNEE: int
-        + getMergeRequests(accessToken: String): List<MrInfoForm>
-        + executeGitLabApi(accessToken: String): List<GitLabMergeRequestApiResponseDto>
-        + generateMrInfoForm(responseDtos: List<GitLabMergeRequestApiResponseDto>): MrInfoForm
+      class GitLabRequestServiceImpl {
       }
     }
     namespace external {
-      class IGitLabApiExecutor {
-        + getMergeRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
+      class IApiExecutor {
       }
 
       class GitLabApiExecutorImpl {
-        + getMergeRequests(accessToken: String): List<GitLabMergeRequestApiResponseDto>
       }
     }
 
-    MrListController --> IMergeRequestService : uses
-    MergeRequestServiceImpl --|> IMergeRequestService
-    MergeRequestServiceImpl --> IGitLabApiExecutor
-    GitLabApiExecutorImpl --|> IGitLabApiExecutor
+    namespace presentation {
+      class IPresenter {
+
+      }
+
+      class GitLabPresenter {
+      }
+    }
+
+    %% controller
+    RequestListController --> IRequestService
+    RequestListController --> IPresenter
+
+    %% service
+    GitLabRequestServiceImpl --|> IRequestService
+    GitLabRequestServiceImpl --> IApiExecutor
+
+    %% external
+    GitLabApiExecutorImpl --|> IApiExecutor
+
+    %% presentation
+    GitLabPresenter --|> IPresenter
+

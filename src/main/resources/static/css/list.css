@@ -20,7 +20,7 @@ table {
     border-collapse:collapse;
 }
 
-.mrTable {
+.requestTable {
     width: 100%;
 }
 
@@ -76,40 +76,40 @@ table {
     border-bottom-color: darkgray;
 }
 
-.mrList {
+.requestList {
     margin: 0;
     padding: 0;
 }
 
-.mrList li:not(:last-child) {
+.requestList li:not(:last-child) {
     border-bottom: solid;
     border-bottom-width: thin;
     border-bottom-color: darkgray;
 }
 
-.mrBox {
+.requestBox {
     padding: 5px;
     display: flex;
 }
 
-.mrLinkBox {
+.requestLinkBox {
     display: flex;
     margin-bottom: 5px;
 }
 
-.mrLink {
+.requestLink {
     text-decoration: none;
     font-weight: bold;
 }
 
-.mrLink:hover {
+.requestLink:hover {
     opacity: 0.7;
 }
 
-.mrLinkBox .upvotes {
+.requestLinkBox .upvotes {
     margin-left: auto;
 }
-.mrLinkBox .upvotes svg {
+.requestLinkBox .upvotes svg {
     width: 20px;
 }
 
