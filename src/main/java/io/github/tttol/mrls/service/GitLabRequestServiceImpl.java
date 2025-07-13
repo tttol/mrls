@@ -9,10 +9,10 @@ import io.github.tttol.mrls.dto.RequestDto;
 import io.github.tttol.mrls.external.IApiExecutor;
 
 @Service("gitlabRequestService")
-public class GitLabMergeRequestServiceImpl implements IRequestService {
+public class GitLabRequestServiceImpl implements IRequestService {
 
         private final IApiExecutor gitLabApiExecutor;
-        public GitLabMergeRequestServiceImpl(@Qualifier("gitlabApiExecutor") final IApiExecutor gitLabApiExecutor) {
+        public GitLabRequestServiceImpl(@Qualifier("gitlabApiExecutor") final IApiExecutor gitLabApiExecutor) {
                 this.gitLabApiExecutor = gitLabApiExecutor;
         }
 

@@ -42,18 +42,18 @@ public class GitLabPresenter implements IPresenter {
             assignee.getWebUrl()))
         .orElse(UserForm.empty());
     final var requestDetailForms = requests.stream()
-        .sorted(Comparator.comparing(r -> r.updatedAt()))
+        .sorted(Comparator.comparing(RequestDto::updatedAt))
         .map(r -> new RequestDetailForm(
             r.title(),
             r.url(),
             Optional.ofNullable(r.author())
-                .map(assignee -> new UserForm(
-                    assignee.getId(),
-                    assignee.getUsername(),
-                    assignee.getName(),
-                    assignee.getState(),
-                    assignee.getAvatarUrl(),
-                    assignee.getWebUrl()))
+                .map(author -> new UserForm(
+                    author.getId(),
+                    author.getUsername(),
+                    author.getName(),
+                    author.getState(),
+                    author.getAvatarUrl(),
+                    author.getWebUrl()))
                 .orElse(UserForm.empty()),
             r.upvotes(),
             r.labels(),
@@ -62,5 +62,4 @@ public class GitLabPresenter implements IPresenter {
         .toList();
     return new RequestInfoForm(assigneeForm, requestDetailForms, requestDetailForms.size());
   }
-
 }
