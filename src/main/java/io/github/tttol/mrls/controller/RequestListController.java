@@ -2,14 +2,13 @@ package io.github.tttol.mrls.controller;
 
 import java.time.OffsetDateTime;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import io.github.tttol.mrls.presentation.GitLabPresenter;
 import io.github.tttol.mrls.presentation.IPresenter;
-import io.github.tttol.mrls.service.GitLabMergeRequestServiceImpl;
 import io.github.tttol.mrls.service.IRequestService;
 
 @Controller
@@ -19,7 +18,7 @@ public class RequestListController {
     private final IRequestService gitlabMergeRequestService;
     private final IPresenter presenter;
 
-    public RequestListController(final GitLabMergeRequestServiceImpl gitlabMergeRequestService, final GitLabPresenter presenter) {
+    public RequestListController(@Qualifier("gitlabRequestService") final IRequestService gitlabMergeRequestService, @Qualifier("gitlabPresenter") final IPresenter presenter) {
         this.gitlabMergeRequestService = gitlabMergeRequestService;
         this.presenter = presenter;
     }

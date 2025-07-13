@@ -17,7 +17,7 @@ import io.github.tttol.mrls.exception.GitLabApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Component
+@Component("gitlabApiExecutor")
 @RequiredArgsConstructor
 @Slf4j
 public class GitLabApiExecutor implements IApiExecutor {

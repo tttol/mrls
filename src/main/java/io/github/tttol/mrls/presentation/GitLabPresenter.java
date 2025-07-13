@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import io.github.tttol.mrls.dto.RequestDto;
@@ -15,6 +16,7 @@ import io.github.tttol.mrls.form.RequestInfoForm;
 import io.github.tttol.mrls.form.UserForm;
 
 @Component
+@Qualifier("gitlabPresenter")
 public class GitLabPresenter implements IPresenter {
   private final int NONE_ASSIGNEE = -1;
 
