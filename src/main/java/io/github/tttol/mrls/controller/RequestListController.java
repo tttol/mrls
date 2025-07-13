@@ -15,17 +15,17 @@ import io.github.tttol.mrls.service.IRequestService;
 @RequestMapping("/list")
 public class RequestListController {
 
-    private final IRequestService gitlabMergeRequestService;
+    private final IRequestService gitlabRequestService;
     private final IPresenter presenter;
 
-    public RequestListController(@Qualifier("gitlabRequestService") final IRequestService gitlabMergeRequestService, @Qualifier("gitlabPresenter") final IPresenter presenter) {
-        this.gitlabMergeRequestService = gitlabMergeRequestService;
+    public RequestListController(@Qualifier("gitlabRequestService") final IRequestService gitlabRequestService, @Qualifier("gitlabPresenter") final IPresenter presenter) {
+        this.gitlabRequestService = gitlabRequestService;
         this.presenter = presenter;
     }
 
     @GetMapping("/pat") // Project Access Toekn
     public String pat(final Model model) {
-        var requests = gitlabMergeRequestService.getRequests();
+        var requests = gitlabRequestService.getRequests();
         var requestInfoForms = presenter.convert(requests);
         model.addAttribute("requestInfoFormList", requestInfoForms);
         model.addAttribute("oneWeekAgo", OffsetDateTime.now().minusDays(7));

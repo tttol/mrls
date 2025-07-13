@@ -1,18 +1,22 @@
 package io.github.tttol.mrls.controller;
 
 import io.github.tttol.mrls.dto.RequestDto;
+import io.github.tttol.mrls.form.RequestDetailForm;
 import io.github.tttol.mrls.form.RequestInfoForm;
+import io.github.tttol.mrls.form.UserForm;
 import io.github.tttol.mrls.presentation.IPresenter;
 import io.github.tttol.mrls.service.IRequestService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,19 +35,28 @@ public class RequestListControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
-//     @MockBean
-//     private GitLabApiExecutor gitLabApiExecutor;
     @MockBean
+    @Qualifier("gitlabRequestService")
     private IRequestService requestService;
     @MockBean
+    @Qualifier("gitlabPresenter")
     private IPresenter presenter;
 
     @BeforeEach
     public void init() {
-        // Fill all constructor arguments with null
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        doReturn(List.of(new RequestDto(0, null, null, null, 0, null, null, null, null))).when(requestService).getRequests();
-        doReturn(List.of(new RequestInfoForm(null, null, 0))).when(presenter).convert(any());
+        var dummyUser = new UserForm(1, "test-user", "Test User", "active", "https://example.com/avatar.png", "https://example.com/user");
+        var dummyRequestDetail = new RequestDetailForm(
+            "Test Request",
+            "https://example.com/request",
+            dummyUser,
+            0,
+            List.of("test"),
+            OffsetDateTime.now(),
+            OffsetDateTime.now()
+        );
+        doReturn(List.of(new RequestDto(1, null, null, null, 0, null, null, null, null))).when(requestService).getRequests();
+        doReturn(List.of(new RequestInfoForm(dummyUser, List.of(dummyRequestDetail), 1))).when(presenter).convert(any());
     }
 
     @Test
