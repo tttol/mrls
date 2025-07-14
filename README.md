@@ -52,4 +52,5 @@ docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xx
 ```
 
 # Release
-1. Publish tag in GitHub. The format of tag is `*.*.*`.
+Publish a tag in GitHub. The format of tag is `*.*.*`.<br>
+The release script is here(https://github.com/tttol/mrls/blob/main/.github/workflows/deploy.yml).
