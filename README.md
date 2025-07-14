@@ -1,7 +1,6 @@
 # About MRLS
-
-GitLabからMergeRequestを取得して一覧表示する。ユーザー単位でグルーピングして表示することで、誰がどのMRを担当しているかを明確にする。<br>
-デモページはこちら: https://tttol.github.io/mrls/
+This tool fetches and displays a list of GitLab Merge Requests. By grouping them by user, it clearly shows who is responsible for each MR.　<br>
+Check out the demo page here: https://tttol.github.io/mrls/
 ![ページサンプル](demo.png)
 
 # Quick Start
