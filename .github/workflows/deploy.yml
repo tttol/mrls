@@ -37,7 +37,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          ./gradlew bootBuildImage
+          ./gradlew bootBuildImage --imageName=mrls
           docker tag mrls:latest ${{ secrets.DOCKERHUB_USERNAME }}/mrls:${{ env.VERSION }}
           docker tag mrls:latest ${{ secrets.DOCKERHUB_USERNAME }}/mrls:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/mrls:${{ env.VERSION }}
