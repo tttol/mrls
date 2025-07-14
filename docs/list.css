@@ -1,0 +1,154 @@
+body {
+    background-color: #15202B;
+    color: #fff;
+    margin: 0;
+}
+
+main {
+    margin: 1% 25%;
+}
+
+a:-webkit-any-link  {
+    color: #fff;
+}
+
+ul {
+  list-style-type: none;
+}
+
+table {
+    border-collapse:collapse;
+}
+
+.requestTable {
+    width: 100%;
+}
+
+.headerBox {
+    background-color: #292961;
+    height: 30px;
+    font-size: 25px;
+    padding: 12px 0px;
+    text-align: center;
+}
+
+.assigneeAvatarImg {
+    width: 50px;
+    height: 50px;
+    border: solid;
+    border-width: 0.5px;
+    border-radius: 50%;
+}
+
+.authorAvatarImg {
+    width: 25px;
+    height: 25px;
+    border: solid;
+    border-width: 0.5px;
+    border-radius: 50%;
+}
+
+.avatar {
+    position: relative;
+    padding: 1rem;
+}
+
+.badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 3.2rem;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background-color: #E93F33;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+   padding: 2px 3px;
+}
+
+.assigneeBox {
+    margin-bottom: 10px;
+    border-bottom: solid;
+    border-bottom-width: thin;
+    border-bottom-color: darkgray;
+}
+
+.requestList {
+    margin: 0;
+    padding: 0;
+}
+
+.requestList li:not(:last-child) {
+    border-bottom: solid;
+    border-bottom-width: thin;
+    border-bottom-color: darkgray;
+}
+
+.requestBox {
+    padding: 5px;
+    display: flex;
+}
+
+.requestLinkBox {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.requestLink {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.requestLink:hover {
+    opacity: 0.7;
+}
+
+.requestLinkBox .upvotes {
+    margin-left: auto;
+}
+.requestLinkBox .upvotes svg {
+    width: 20px;
+}
+
+.titleBox {
+    padding-right: 20px;
+}
+
+.at {
+    color: darkgray;
+    font-size: 13px;
+    padding-right: 10px;
+}
+
+.warning {
+    color: yellow;
+    font-weight: bold;
+}
+
+.severe {
+    color: orangered;
+    font-weight: bold;
+}
+
+.authorBox {
+    margin-right: 10px;
+}
+
+.labelBox .label {
+    display: inline-block;
+    width: auto;
+    padding: 2px 4px;
+}
+
+.footerBox {
+    height: 30px;
+    padding: 12px 12px;
+}
+
+.appVer {
+    color: darkgray;
+    font-size: 10pt;
+}
