@@ -18,14 +18,10 @@ docker run --name mrls --env GITLAB_PROJECT_ID=xxxx --env GITLAB_ACCESS_TOKEN=xx
 
 ## Environment variables
 - GITLAB_HOST
-    - GitLabのhost
 - GITLAB_PROJECT_ID
-    - GitLabのプロジェクトID
 - GITLAB_ACCESS_TOKEN
-    - GitLabのアクセストークン
     - project access token / personal access token / group access token
     - scope=`api`
-        - `/merge_requests`APIが実行できる権限であればOK
     - More info -> https://docs.gitlab.com/ee/api/rest/
 - PROXY_HOST (optional)
 - PROXY_PORT (optioanl)
